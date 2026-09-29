@@ -13,6 +13,7 @@ fit by Kalman EM, then read in continuous time as
 $$
 dx_t = A_c x_t\,dt + dW_t,\qquad \mathrm{Cov}(dW_t) = D\,dt.
 $$
+
 This is a multivariate Ornstein-Uhlenbeck process. $A_c$ is not assumed symmetric, so the process can rotate (it is not time-reversible). Solving the Lyapunov equation $A_c\Pi + \Pi A_c^\top = -D$ gives the stationary covariance $\Pi$, and the antisymmetric part of $A_c\Pi$ is the rotation. A rotational OU process is the model for the latent state of the EEG.
 ## Questions
 
