@@ -13,7 +13,7 @@ fit by Kalman EM, then read in continuous time as
 $$
 dx_t = A_c x_t\,dt + dW_t,\qquad \mathrm{Cov}(dW_t) = D\,dt.
 $$
-
+This is a multivariate Ornstein-Uhlenbeck process. $A_c$ is not assumed symmetric, so the process can rotate (it is not time-reversible). Solving the Lyapunov equation $A_c\Pi + \Pi A_c^\top = -D$ gives the stationary covariance $\Pi$, and the antisymmetric part of $A_c\Pi$ is the rotation. A rotational OU process is the model for the latent state of the EEG.
 ## Questions
 
 1. Is the data clean enough to model, and which trials or channels need a decision?
@@ -26,7 +26,7 @@ $$
 
 The EEG recordings this pipeline was built for will not be released. The code is public; the data is not.
 
-To run and test the code, use the synthetic dataset. `make_synthetic_data.py` generates it in the same format as the real recordings, from a known latent SDE (a 6 Hz damped rotation plus a slow coordinate). The true parameters are known, so the fit can be checked against them.
+To run and test the code, use the synthetic dataset. `make_synthetic_data.py` generates it in the same format as the real recordings, from a known rotational OU process: a 2-d OU coordinate pair rotating at 6 Hz, plus a slow 1-d OU coordinate. The true parameters are known, so the fit can be checked against them.
 
 The scripts read a `.mat` file with a 1 × n cell array `Xcell` of (channels × samples) arrays; any recording in that format works. Sampling rate defaults to 250 Hz (`--fs`). Every frequency and decay rate in the output scales with it.
 
@@ -83,5 +83,8 @@ neural-dynamics-inference/
 ```
 
 ## Next
+How characteristics of the brain signal changes with age/medication
 
 How uncertainty in the learned model affects the ability to detect and respond to changes in the hidden state, and which errors in the estimated drift and noise actually change the conclusions (the rotation, the landscape, a detector built on the model).
+
+This is an ongoing thesis project
